@@ -1,2 +1,0 @@
-# Bomahub
-Rental houses Management

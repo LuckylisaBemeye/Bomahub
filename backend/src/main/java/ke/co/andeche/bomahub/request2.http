@@ -1,0 +1,70 @@
+### Debug authentication
+GET http://192.168.88.251:8080/api/auth/debug
+
+### Register new user
+POST http://192.168.88.251:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "property.manager",
+  "password": "password123",
+  "email": "manager@bomahub.com",
+  "name": "John Manager",
+  "role": "MANAGER"
+}
+
+### Login
+POST http://192.168.88.251:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "property.manager",
+  "password": "password123"
+}
+
+### Create organization
+POST http://192.168.88.251:8080/api/organizations
+Content-Type: application/json
+
+{
+  "name": "Wanda",
+  "address": "123 Main St",
+  "phone": "1234567890",
+  "email": "org@example.com",
+  "verificationCode": "ORG123"
+}
+
+### Create property
+POST 192.168.88.251:8080/api/properties/create-property
+Content-Type: application/json
+
+{
+  "propertyName": "Sunset Apartments",
+  "propertyAddress": "456 Sunset Boulevard, Nairobi",
+  "floorCount": 3,
+  "unitsPerFloor": 4,
+  "defaultRent": 25000.0,
+  "startFloor": 1,
+  "customFloorUnits": 2,
+  "customFloorRent": 35000.0
+}
+
+### Get all properties
+GET 192.168.88.251:8080/api/properties
+
+### Create Tenancy
+POST 192.168.88.251:8080/api/unit-tenancy/create-complete
+Content-Type: application/json
+
+{
+  "propertyId": 1,
+  "unitIds": [1, 2],
+  "firstName": "Jane",
+  "lastName": "Doe",
+  "email": "jane.doe@email.com",
+  "phone": "254-700-987654",
+  "idNumber": "12345678",
+  "emergencyContact": "John Doe: 254-700-111222",
+  "monthlyRent": 25000.0,
+  "startDate": "2024-01-01"
+}

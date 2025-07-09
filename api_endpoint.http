@@ -1,0 +1,527 @@
+### BOMaHub API Endpoints Collection
+### Base URL: http://localhost:8080
+
+#####################################################################
+# AUTHENTICATION ENDPOINTS
+#####################################################################
+
+### Register new user
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "john_doe",
+  "password": "password123",
+  "email": "john@example.com",
+  "name": "John Doe",
+  "role": "PROPERTY_MANAGER",
+  "verificationCode": "ORG123456"
+}
+
+### Login
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "john_doe",
+  "password": "password123"
+}
+
+### Get current user info
+GET http://localhost:8080/api/auth/me
+
+### Logout
+POST http://localhost:8080/api/auth/logout
+
+### Debug authentication
+GET http://localhost:8080/api/auth/debug
+
+#####################################################################
+# ORGANIZATION ENDPOINTS
+#####################################################################
+
+### Get all organizations
+GET http://localhost:8080/api/organizations
+
+### Get organization by ID
+GET http://localhost:8080/api/organizations/1
+
+### Get organization by verification code
+GET http://localhost:8080/api/organizations/verify/ORG123456
+
+### Create new organization
+POST http://localhost:8080/api/organizations
+Content-Type: application/json
+
+{
+  "name": "Property Management Co.",
+  "address": "123 Main Street, City",
+  "phone": "+254700123456",
+  "email": "info@propertymanagement.com",
+  "verificationCode": "ORG123456"
+}
+
+### Update organization
+PUT http://localhost:8080/api/organizations/1
+Content-Type: application/json
+
+{
+  "name": "Updated Property Management Co.",
+  "address": "456 Updated Street, City",
+  "phone": "+254700654321",
+  "email": "updated@propertymanagement.com",
+  "verificationCode": "ORG123456"
+}
+
+### Delete organization
+DELETE http://localhost:8080/api/organizations/1
+
+#####################################################################
+# USER ENDPOINTS
+#####################################################################
+
+### Get all users
+GET http://localhost:8080/api/users
+
+### Get user by ID
+GET http://localhost:8080/api/users/1
+
+### Create new user
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{
+  "username": "jane_smith",
+  "password": "password456",
+  "email": "jane@example.com",
+  "name": "Jane Smith",
+  "role": "TENANT"
+}
+
+### Update user
+PUT http://localhost:8080/api/users/1
+Content-Type: application/json
+
+{
+  "username": "jane_smith_updated",
+  "password": "newpassword456",
+  "email": "jane.updated@example.com",
+  "name": "Jane Smith Updated",
+  "role": "PROPERTY_MANAGER"
+}
+
+### Delete user
+DELETE http://localhost:8080/api/users/1
+
+#####################################################################
+# PROPERTY ENDPOINTS
+#####################################################################
+
+### Get all properties
+GET http://localhost:8080/api/properties
+
+### Get properties by organization
+GET http://localhost:8080/api/properties/organization/1
+
+### Get property by ID
+GET http://localhost:8080/api/properties/1
+
+### Create new property
+POST http://localhost:8080/api/properties
+Content-Type: application/json
+
+{
+  "name": "Skyline Apartments",
+  "address": "789 Property Avenue, City",
+  "description": "Modern apartment complex",
+  "totalFloors": 5,
+  "totalUnits": 20
+}
+
+### Update property
+PUT http://localhost:8080/api/properties/1
+Content-Type: application/json
+
+{
+  "name": "Updated Skyline Apartments",
+  "address": "789 Updated Property Avenue, City",
+  "description": "Updated modern apartment complex",
+  "totalFloors": 6,
+  "totalUnits": 24
+}
+
+### Delete property
+DELETE http://localhost:8080/api/properties/1
+
+### Create property with structure (floors and units)
+POST http://localhost:8080/api/properties/create-property
+Content-Type: application/json
+
+{
+  "propertyName": "Green Valley Apartments",
+  "propertyAddress": "100 Green Valley Road, City",
+  "floorCount": 4,
+  "unitsPerFloor": 6,
+  "defaultRent": 25000.00,
+  "startFloor": 1,
+  "customFloorUnits": 8,
+  "customFloorRent": 30000.00
+}
+
+#####################################################################
+# FLOOR ENDPOINTS
+#####################################################################
+
+### Get all floors
+GET http://localhost:8080/api/floors
+
+### Get floors by property
+GET http://localhost:8080/api/floors/property/1
+
+### Get floor by ID
+GET http://localhost:8080/api/floors/1
+
+### Create new floor
+POST http://localhost:8080/api/floors
+Content-Type: application/json
+
+{
+  "floorNumber": 2,
+  "description": "Second floor",
+  "property": {
+    "id": 1
+  }
+}
+
+### Update floor
+PUT http://localhost:8080/api/floors/1
+Content-Type: application/json
+
+{
+  "floorNumber": 2,
+  "description": "Updated second floor",
+  "property": {
+    "id": 1
+  }
+}
+
+### Delete floor
+DELETE http://localhost:8080/api/floors/1
+
+#####################################################################
+# UNIT ENDPOINTS
+#####################################################################
+
+### Get all units
+GET http://localhost:8080/api/units
+
+### Get units by property
+GET http://localhost:8080/api/units/property/1
+
+### Get units by property and status
+GET http://localhost:8080/api/units/property/1/status/available
+
+### Get units by floor
+GET http://localhost:8080/api/units/floor/1
+
+### Get unit by ID
+GET http://localhost:8080/api/units/1
+
+### Create new unit
+POST http://localhost:8080/api/units
+Content-Type: application/json
+
+{
+  "unitNumber": "A101",
+  "bedrooms": 2,
+  "bathrooms": 1,
+  "squareFootage": 800.0,
+  "rent": 25000.00,
+  "status": "available",
+  "description": "Two-bedroom apartment",
+  "floor": {
+    "id": 1
+  },
+  "property": {
+    "id": 1
+  }
+}
+
+### Update unit
+PUT http://localhost:8080/api/units/1
+Content-Type: application/json
+
+{
+  "unitNumber": "A101",
+  "bedrooms": 2,
+  "bathrooms": 2,
+  "squareFootage": 850.0,
+  "rent": 27000.00,
+  "status": "occupied",
+  "description": "Updated two-bedroom apartment",
+  "floor": {
+    "id": 1
+  },
+  "property": {
+    "id": 1
+  }
+}
+
+### Update unit status only
+PATCH http://localhost:8080/api/units/1/status
+Content-Type: application/json
+
+{
+  "status": "occupied"
+}
+
+### Delete unit
+DELETE http://localhost:8080/api/units/1
+
+#####################################################################
+# TENANT ENDPOINTS
+#####################################################################
+
+### Get all tenants
+GET http://localhost:8080/api/tenants
+
+### Get tenants by property
+GET http://localhost:8080/api/tenants/property/1
+
+### Get tenant by ID
+GET http://localhost:8080/api/tenants/1
+
+### Get tenant by ID number
+GET http://localhost:8080/api/tenants/id-number/12345678
+
+### Get tenant by email
+GET http://localhost:8080/api/tenants/email/tenant@example.com
+
+### Create new tenant
+POST http://localhost:8080/api/tenants
+Content-Type: application/json
+
+{
+  "firstName": "Alice",
+  "lastName": "Johnson",
+  "email": "alice.johnson@example.com",
+  "phone": "+254700111222",
+  "idNumber": "12345678",
+  "emergencyContact": "+254700333444",
+  "occupation": "Software Engineer",
+  "monthlyIncome": 150000.00
+}
+
+### Update tenant
+PUT http://localhost:8080/api/tenants/1
+Content-Type: application/json
+
+{
+  "firstName": "Alice",
+  "lastName": "Johnson-Smith",
+  "email": "alice.johnson.smith@example.com",
+  "phone": "+254700111223",
+  "idNumber": "12345678",
+  "emergencyContact": "+254700333445",
+  "occupation": "Senior Software Engineer",
+  "monthlyIncome": 180000.00
+}
+
+### Delete tenant
+DELETE http://localhost:8080/api/tenants/1
+
+#####################################################################
+# UNIT TENANCY ENDPOINTS
+#####################################################################
+
+### Get all tenancies
+GET http://localhost:8080/api/tenancies
+
+### Get tenancies by property
+GET http://localhost:8080/api/tenancies/property/1
+
+### Get tenancies by unit
+GET http://localhost:8080/api/tenancies/unit/1
+
+### Get tenancies by tenant
+GET http://localhost:8080/api/tenancies/tenant/1
+
+### Get tenancy by ID
+GET http://localhost:8080/api/tenancies/1
+
+### Create new tenancy
+POST http://localhost:8080/api/tenancies
+Content-Type: application/json
+
+{
+  "propertyId": 1,
+  "unitIds": [1, 2],
+  "firstName": "Bob",
+  "lastName": "Wilson",
+  "email": "bob.wilson@example.com",
+  "phone": "+254700555666",
+  "idNumber": "87654321",
+  "emergencyContact": "+254700777888",
+  "monthlyRent": 50000.00,
+  "startDate": "2025-08-01"
+}
+
+### Update tenancy
+PUT http://localhost:8080/api/tenancies/1
+Content-Type: application/json
+
+{
+  "monthlyRent": 55000.00,
+  "startDate": "2025-08-01",
+  "endDate": "2026-07-31",
+  "status": "active",
+  "securityDeposit": 55000.00,
+  "tenant": {
+    "id": 1
+  },
+  "unit": {
+    "id": 1
+  }
+}
+
+### Terminate tenancy
+PUT http://localhost:8080/api/tenancies/1/terminate
+
+### Delete tenancy
+DELETE http://localhost:8080/api/tenancies/1
+
+#####################################################################
+# PAYMENT ENDPOINTS
+#####################################################################
+
+### Get all payments
+GET http://localhost:8080/api/payments
+
+### Get payments by unit tenancy
+GET http://localhost:8080/api/payments/unit-tenancy/1
+
+### Get payments by property
+GET http://localhost:8080/api/payments/property/1
+
+### Get payments by property and status
+GET http://localhost:8080/api/payments/property/1/status/pending
+
+### Get payment by ID
+GET http://localhost:8080/api/payments/1
+
+### Create new payment
+POST http://localhost:8080/api/payments
+Content-Type: application/json
+
+{
+  "amount": 25000.00,
+  "paymentDate": "2025-07-10",
+  "dueDate": "2025-07-31",
+  "paymentStatus": "pending",
+  "paymentType": "rent",
+  "paymentMethod": "bank_transfer",
+  "referenceNumber": "PAY20250710001",
+  "description": "Monthly rent payment for July 2025",
+  "unitTenancy": {
+    "id": 1
+  }
+}
+
+### Update payment
+PUT http://localhost:8080/api/payments/1
+Content-Type: application/json
+
+{
+  "amount": 25000.00,
+  "paymentDate": "2025-07-10",
+  "dueDate": "2025-07-31",
+  "paymentStatus": "paid",
+  "paymentType": "rent",
+  "paymentMethod": "bank_transfer",
+  "referenceNumber": "PAY20250710001",
+  "description": "Monthly rent payment for July 2025 - PAID",
+  "unitTenancy": {
+    "id": 1
+  }
+}
+
+### Update payment status only
+PATCH http://localhost:8080/api/payments/1/status
+Content-Type: application/json
+
+{
+  "status": "paid"
+}
+
+### Delete payment
+DELETE http://localhost:8080/api/payments/1
+
+### Process payment (multiple payments)
+POST http://localhost:8080/api/payments/process-payment
+Content-Type: application/json
+
+{
+  "tenantId": 1,
+  "pendingPaymentIds": [1, 2, 3],
+  "amount": 75000.00,
+  "paymentDate": "2025-07-10",
+  "paymentMethod": "mobile_money",
+  "referenceNumber": "MM20250710001",
+  "description": "Bulk payment for multiple pending amounts"
+}
+
+#####################################################################
+# DASHBOARD ENDPOINTS
+#####################################################################
+
+### Get property statistics for dashboard
+GET http://localhost:8080/api/dashboard/property/1/stats
+
+#####################################################################
+# COMMON REQUEST HEADERS (if authentication is required)
+#####################################################################
+
+### Example with session-based authentication
+# Cookie: JSESSIONID=your-session-id-here
+
+#####################################################################
+# SAMPLE RESPONSE STRUCTURES
+#####################################################################
+
+### Typical Success Response
+# {
+#   "success": true,
+#   "message": "Operation completed successfully",
+#   "data": { ... }
+# }
+
+### Typical Error Response
+# {
+#   "success": false,
+#   "message": "Error message description",
+#   "error": "Error details"
+# }
+
+### Dashboard Stats Response Example
+# {
+#   "totalUnits": 24,
+#   "availableUnits": 8,
+#   "occupiedUnits": 16,
+#   "occupancyRate": 67,
+#   "tenantCount": 16,
+#   "pendingPayments": 5,
+#   "completedPayments": 45,
+#   "overduePayments": 2
+# }
+
+#####################################################################
+# NOTES
+#####################################################################
+
+# 1. Replace IDs (1, 2, 3, etc.) with actual IDs from your database
+# 2. Update base URL if different from localhost:8080
+# 3. Some endpoints might require authentication - add session cookies or JWT tokens
+# 4. Date formats should be in ISO format (YYYY-MM-DD)
+# 5. Monetary amounts are in the currency used by your application
+# 6. Status values depend on your application's enum definitions
+# 7. For testing, create organizations and users first before other entities

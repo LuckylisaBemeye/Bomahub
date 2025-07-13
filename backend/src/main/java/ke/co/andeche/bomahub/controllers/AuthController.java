@@ -52,9 +52,9 @@ public class AuthController {
         return ResponseEntity.ok(userInfo);
     }
 
-//    @PostMapping("/register")
-//    public ResponseEntity<?> register(@RequestBody User user) {
-//        if (userService.existsByUsername(user.getUsername())) {
+ @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody User user) {
+        if (userService.existsByUsername(user.getUsername())) {
 //            Map<String, String> error = new HashMap<>();
 //            error.put("error", "Username already exists");
 //            return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
@@ -71,7 +71,7 @@ public class AuthController {
 //        User createdUser = userService.createUser(user);
 //        return ResponseEntity.ok(createdUser);
 //
-//    }
+ }
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody UserRegistrationRequest request) {

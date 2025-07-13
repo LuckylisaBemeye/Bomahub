@@ -23,16 +23,16 @@ public class FloorController {
         return floorRepository.findAll();
     }
 
-   // @GetMapping("/property/{propertyId}")
-   // public List<Floor> getFloorsByProperty(@PathVariable Long propertyId) {
-     //   return floorRepository.findByPropertyId(propertyId);
-    //}
+   @GetMapping("/property/{propertyId}")
+    public List<Floor> getFloorsByProperty(@PathVariable Long propertyId) {
+        return floorRepository.findByPropertyId(propertyId);
+    }
 
-    //@GetMapping("/{id}")
-    //public ResponseEntity<Floor> getFloorById(@PathVariable Long id) {
-      //  return floorRepository.findById(id)
-        //        .map(ResponseEntity::ok)
-          //      .orElse(ResponseEntity.notFound().build());
+    @GetMapping("/{id}")
+    public ResponseEntity<Floor> getFloorById(@PathVariable Long id) {
+        return floorRepository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     //}
 
     //@PostMapping

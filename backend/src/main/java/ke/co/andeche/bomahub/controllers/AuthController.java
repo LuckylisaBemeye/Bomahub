@@ -55,19 +55,19 @@ public class AuthController {
  @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody User user) {
         if (userService.existsByUsername(user.getUsername())) {
-//            Map<String, String> error = new HashMap<>();
-//            error.put("error", "Username already exists");
-//            return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
-//        }
-//
-//        if (userService.existsByEmail(user.getEmail())) {
-//            Map<String, String> error = new HashMap<>();
-//            error.put("error", "Email already exists");
-//            return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
-//        }
-//
-//        // Encode password before saving
-////        user.setPassword(passwordEncoder.encode(user.getPassword()));
+           Map<String, String> error = new HashMap<>();
+            error.put("error", "Username already exists");
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+        }
+
+        if (userService.existsByEmail(user.getEmail())) {
+            Map<String, String> error = new HashMap<>();
+            error.put("error", "Email already exists");
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+        }
+
+        // Encode password before saving
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 //        User createdUser = userService.createUser(user);
 //        return ResponseEntity.ok(createdUser);
 //

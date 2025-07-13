@@ -68,9 +68,9 @@ public class AuthController {
 
         // Encode password before saving
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-//        User createdUser = userService.createUser(user);
-//        return ResponseEntity.ok(createdUser);
-//
+        User createdUser = userService.createUser(user);
+        return ResponseEntity.ok(createdUser);
+
  }
 
     @PostMapping("/register")
